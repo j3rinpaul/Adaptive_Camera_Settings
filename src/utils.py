@@ -9,6 +9,8 @@ import torchvision.models as models
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
+#input 
+
 resnet = models.resnet18(weights=models.ResNet18_Weights.DEFAULT).to(device)
 
 # Remove the final FC layer

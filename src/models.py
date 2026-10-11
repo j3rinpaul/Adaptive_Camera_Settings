@@ -21,7 +21,7 @@ class LensPredictorNetwork(nn.Module):
 
             nn.ReLU(),
 
-            nn.Dropout(0.3),
+            nn.Dropout(0.4),
 
             nn.Linear(128,27)
 

@@ -6,6 +6,7 @@ import torchvision.transforms as transforms
 from utils import extract_features
 import os
 import numpy as np
+from pathlib import Path
 
 class LensDataset(Dataset):
     def __init__(self, csv_file, base_img_dir, transform=None,
@@ -29,12 +30,26 @@ class LensDataset(Dataset):
 
     def __getitem__(self, index):
         row    = self.data_frame.iloc[index]
-        target = np.fromstring(row["confidence_vector"].strip("[]"),sep=" ")
-
+        target = np.fromstring(row["all_27_confidences"].strip("[]"),sep=",")
+        target = target/target.max()
         target = torch.tensor(target, dtype=torch.float32)
 
-        img_path = row['ae_image_path']
-        image    = Image.open(img_path).convert('RGB')
+        
+        csv_path = Path(row["image_path"])
+    
+    # Extract metadata
+        class_name = csv_path.parent.name
+        filename = csv_path.name
+        # lighting = row["lighting"] 
+        # target = int(row["label"])
+        
+        # Get the inner base directory (e.g., 'ImageNet-ES-Diverse/es-diverse-test')
+        base_dir = csv_path.parents[4]
+        
+        # 1. Build the TRUE AE Path (Prepending the outer ImageNet folder)
+        ae_path = Path(os.path.join('ImageNet-ES-Diverse/', base_dir, "auto_exposure", "l1", "param_1", class_name, filename))
+        
+        image    = Image.open(ae_path).convert('RGB')
 
         if self.transform:
             img_tensor = self.transform(image)
