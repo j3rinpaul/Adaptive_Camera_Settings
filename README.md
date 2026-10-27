@@ -89,12 +89,12 @@ Experiments use **ImageNet-ES-Diverse** (Baek et al., CVPR 2024).
 
 **Train**
 ```bash
-python src/train.py --method lage
+python src/train.py 
 ```
 
 **Evaluate**
 ```bash
-python src/eval.py --method lage --checkpoint model/lage.pt
+python src/eval.py
 ```
 
 ## Future Work
