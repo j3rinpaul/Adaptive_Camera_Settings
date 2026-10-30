@@ -56,7 +56,9 @@ Inference takes about 3.5 ms (LACE, LAGE) and 5.15 ms (HB) on a single NVIDIA T4
 ├── output/                                    # Results and figures
 ├── src/                                       # Source code
 ├── GCPR___Predicting_Camera_Parameters-3.pdf  # Our paper
+├── environment.yml                            # environment file
 └── 2503.02170v1.pdf                           # Reference paper
+
 ```
 
 <!-- TODO: add a one-line description of the key files inside src/ and notebooks/ -->
@@ -66,9 +68,7 @@ Inference takes about 3.5 ms (LACE, LAGE) and 5.15 ms (HB) on a single NVIDIA T4
 ```bash
 git clone https://github.com/j3rinpaul/Adaptive_Camera_Settings.git
 cd Adaptive_Camera_Settings
-python -m venv .venv
-source .venv/bin/activate
-pip install -r requirements.txt
+conda create --file environment.yml
 ```
 
 <!-- TODO: add requirements.txt and state the Python / PyTorch versions you used -->
@@ -85,17 +85,8 @@ Experiments use **ImageNet-ES-Diverse** (Baek et al., CVPR 2024).
 
 ## Usage
 
-<!-- TODO: replace with your real entry points (scripts in src/ or notebooks) -->
 
-**Train**
-```bash
-python src/train.py 
-```
-
-**Evaluate**
-```bash
-python src/eval.py
-```
+**All the experiements are done using jupyter notebeooks, so run `Lens_testing_regression.ipynb` from notebooks to verify.**
 
 ## Future Work
 
